@@ -22,6 +22,8 @@ install inquirer with "npm i inquirer@8.2.4".
 
 ## Usage
 
+[Walkthrough Video](https://drive.google.com/file/d/10jjoVrStM0HQPWVA1WKOM3rIHwyDmxay/view)
+
 Once you initialized npm and installed inquirer in the develop folder,
 start the README generator by running "node index.js" inside the develop folder.
 You will be prompted to enter your preferred project title and the project description, the installation instructions, usage information, contribution guidelines, your test instructions.
