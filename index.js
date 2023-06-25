@@ -175,7 +175,7 @@ function init() {
     inquirer
         .prompt(questions)
         .then(response => {
-            writeToFile('README.md', response);
+            writeToFile('sample-README.md', response);
         })
         .catch(error => {
             console.log(error);
