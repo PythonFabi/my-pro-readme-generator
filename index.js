@@ -1,12 +1,15 @@
-// TODO: Include packages needed for this application
+// This includes all the necessary packages for this terminal application --> inquirer and fs(file system)
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// TODO: Create an array of questions for user input
+// This is an array with objects for all the prompt questions
 const questions = [
     {
+        // The type is input
         type: 'input',
+        // the question
         message: 'What is your project title?',
+        // the description of the input
         name: 'title'
     }, {
         type: 'input',
@@ -29,9 +32,11 @@ const questions = [
         message: 'What are your test instructions?',
         name: 'tests'
     }, {
+        // list to choose from the licenses
         type: 'list',
         message: 'What LICENSE would you like to choose?',
         name: 'license',
+        // All the licenses listed in an array as a choice
         choices: ['The MIT License', 'Apache 2.0 License', 'Boost Software License 1.0', 'BSD 3-Clause License', 'BSD 2-Clause License',
          'CC0', 'Attribution 4.0 International', 'Attribution-ShareAlike 4.0 International', 'Attribution-NonCommercial 4.0 International', 'Attribution-NoDerivates 4.0 International',
          'Attribution-NonCommercial-NoDerivatives 4.0 International', 'Eclipse Public License 1.0', 'GNU GPL v3', 'GNU GPL v2',
@@ -52,6 +57,8 @@ const questions = [
 ];
 
 function licenseBadge(license) {
+    // if else if condition, to input the right license badge based on the chosen license
+    // output as an empty string
     let yourLicense = '';
     if(license === 'The MIT License') {
     yourLicense = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
@@ -118,11 +125,13 @@ function licenseBadge(license) {
     } else if (license === 'The zlib/libpng License') {
         yourLicense = '[![License: Zlib](https://img.shields.io/badge/License-Zlib-lightgrey.svg)](https://opensource.org/licenses/Zlib)'
     }
+    // returns the chosen license
     return yourLicense
 }
 
-// TODO: Create a function to write README file
+// this will write, based on the filename and the following parameters, which we get from the prompt answers, will be used to create a README file
 function writeToFile(fileName, {title, license, description, installation, usage, contribution, tests, github, email}) {
+// README content stored in a constant with template literals
 const content = `# ${title} 
 ${licenseBadge(license)}
 
@@ -165,18 +174,22 @@ Here is my Github profile to check out my other repositories: [My Github](https:
 
 Reach me also under my email adress for additional questions: [My email](mailto:${email})`
 
+// function from the fs is used to get the chosen input
 fs.writeFileSync(fileName, content);
 
 
 }
 
-// TODO: Create a function to initialize app
+// function that initializes app
+// init uses the inquirer, which starts with the prompt, which uses the array of questions for the user
 function init() {
     inquirer
         .prompt(questions)
+        // out of that response, the response will be written in the 'sample-README.md'
         .then(response => {
             writeToFile('sample-README.md', response);
         })
+        // in case of an error, the error will be displayed in the terminal
         .catch(error => {
             console.log(error);
         });
